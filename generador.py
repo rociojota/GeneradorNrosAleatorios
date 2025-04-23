@@ -4,6 +4,7 @@ from pruebaPromedios import prueba_promedios
 from pruebaCorrida import prueba_corrida
 from pruebaSerie import prueba_serie
 from pruebaKS import prueba_ks
+from parteCentralCuadrado import metodo_parte_central_cuadrado
 
 import time
 
@@ -77,7 +78,23 @@ def main():
         opcion = input("Opción: ")
 
         if opcion == '1':
-            print("\nMétodo de la parte central del cuadrado:")
+            print("Generador Pseudoaleatorio - Método de la Parte Central del Cuadrado")
+            try:
+                seed = int(input("Ingrese la semilla (M): "))
+                n_digitos = int(input("Ingrese el número de dígitos deseados (N): "))
+                cantidad = int(input("¿Cuántos números desea generar?: "))
+
+                if seed <= 0 or n_digitos <= 0 or cantidad <= 0:
+                    print("❌ Error: Todos los valores deben ser enteros positivos.")
+                else:
+                    resultados = metodo_parte_central_cuadrado(seed, n_digitos, cantidad)
+                    print("\nNúmeros pseudoaleatorios generados:")
+                    for i, r in enumerate(resultados):
+                        print(f"{i + 1}: {r:.5f}")
+                    mostrar_menu_pruebas(resultados)
+
+            except ValueError:
+                print("❌ Error: Solo se permiten números enteros.")
             print("--------------------------------------------------")
 
         elif opcion == '2':
@@ -96,6 +113,7 @@ def main():
             print("\nMétodo Congruencial Mixto:")
             print("--------------------------------------------------")
             resultados = metodo_congruencial_mixto()
+
             print(f"Resultados: {resultados}")
 
         elif opcion == '4':
@@ -115,7 +133,7 @@ def main():
             break
 
         else:
-            print("❌ Opción no válida. Por favor seleccione una opción del 1 al 6.")
+            print("❌ Opción no válida. Por favor selec2cione una opción del 1 al 6.")
             print("--------------------------------------------------")
 
 
