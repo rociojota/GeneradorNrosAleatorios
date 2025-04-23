@@ -7,7 +7,7 @@ def metodo_lehmer(seed, t, k, cantidad):
 
     for _ in range(cantidad):
         producto = n_actual * t
-        producto_str = str(producto).zfill(len(str(seed)) + k)
+        producto_str = str(producto).zfill(len(str(seed)))
         primeros_k_digitos = producto_str[:k]
         resto_derecha = producto_str[k:]
 
