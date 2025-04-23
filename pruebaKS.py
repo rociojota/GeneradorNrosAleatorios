@@ -30,8 +30,12 @@ def main():
     """for i in range(nro_valores):
         valores.append(float(input(f"Ingrese el número {i + 1}: ")))
     d = float(input("Ingrese el valor del estadístico: "))"""
-    valores = [0.01,0.079,0.168,0.858,0.901,0.74,0.713,0.478,0.277,0.019,0.548,0.426]
-    d=0.375
+    valores = [
+    0.792, 0.396, 0.01, 0.158, 0.178, 0.248, 0.99, 0.089, 0.436, 0.149,
+    0.644, 0.376, 0.941, 0.416, 0.079, 0.901, 0.277, 0.594, 0.703, 0.248,
+    0.426, 0.218, 0.96, 0.594, 0.188, 0.584, 0.168, 0.713, 0.119, 0.04
+    ]
+    d=0.130
     prueba_ks(valores, d)
 
 if __name__ == "__main__":

@@ -2,6 +2,42 @@ import math
 from collections import Counter
 
 def prueba_corrida(numeros, estadistico):
+    """
+    Realiza la prueba estadística de corridas arriba y abajo de la media (0.5) para evaluar la aleatoriedad
+    de una secuencia de números reales entre 0 y 1.
+
+    La prueba agrupa valores consecutivos iguales (0 si el número <= 0.5, 1 si > 0.5),
+    cuenta la cantidad de corridas (grupos de valores iguales consecutivos) y compara
+    la frecuencia observada de las longitudes de esas corridas con las frecuencias esperadas
+    bajo la hipótesis de aleatoriedad.
+
+    Se calcula un estadístico de prueba (tipo chi-cuadrado) para determinar si la diferencia
+    entre frecuencias observadas y esperadas es significativa.
+
+    Parámetros:
+    ----------
+    numeros : list[float] -> tamaño de la muestra
+        Lista de números decimales entre 0 y 1 que representan una secuencia generada, por ejemplo, 
+        mediante un generador de números pseudoaleatorios.
+    
+    estadistico : float
+        Valor crítico del estadístico chi-cuadrado con el cual se comparará el valor calculado. 
+        Este valor depende del nivel de significancia y los grados de libertad deseados.
+
+    Salida:
+    -------
+    Imprime en consola:
+        - La secuencia codificada en 0s y 1s.
+        - La frecuencia observada y esperada de cada longitud de corrida.
+        - El valor del estadístico calculado.
+        - El resultado de la prueba (si se pasa o no la prueba de aleatoriedad).
+
+    Nota:
+    -----
+    Esta implementación asume que los valores están uniformemente distribuidos entre 0 y 1.
+    El umbral de corte utilizado para diferenciar arriba/abajo de la media es 0.5.
+    """ 
+    
     secuencia_s = [0 if num <= 0.5 else 1 for num in numeros]
     print(f"Secuencia S: {secuencia_s}")
 
@@ -17,9 +53,7 @@ def prueba_corrida(numeros, estadistico):
     corridas.append(run)
 
     # Calcular longitudes
-    longitudes = []
-    for r in corridas:
-        longitudes.append(len(r))
+    longitudes = [len(r) for r in corridas]
 
     # Contar frecuencias observadas por longitud
     freq_obs = Counter(longitudes)
@@ -30,7 +64,7 @@ def prueba_corrida(numeros, estadistico):
     for L in all_lengths:
         print(f"Longitud {L}: {freq_obs.get(L, 0)}")
 
-    # Calcular frecuencias esperadas según la fórmula para cada longitud L
+    # Calcular frecuencias esperadas
     n = len(numeros)
     print("\nFrecuencia esperada por longitud:")
     freq_esperadas = []
@@ -42,7 +76,6 @@ def prueba_corrida(numeros, estadistico):
     # Calcular el estadístico
     calc_estadistico = 0
     for L in all_lengths:
-        # Si la longitud no aparece en freq_obs, la frecuencia observada es 0
         observed_freq = freq_obs.get(L, 0)
         expected_freq = freq_esperadas[L-1]
         calc_estadistico += ((observed_freq - expected_freq) ** 2)/expected_freq
@@ -53,7 +86,6 @@ def prueba_corrida(numeros, estadistico):
         print("✅ La secuencia pasa la prueba de corrida arriba y abajo de la media.")
     else:
         print("❌ La secuencia NO pasa la prueba de corrida arriba y abajo de la media.")
-
 
 
 def main():
