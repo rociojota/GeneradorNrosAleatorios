@@ -21,23 +21,75 @@ def mostrar_menu_pruebas(resultados):
         if opcion == '1':
             print("\nPrueba de los promedios:")
             print("--------------------------------------------------")
-            z_alpha = float(input("Ingrese el valor de z_alpha: "))
+            while True:
+                entrada = input("Ingrese el valor de z_alpha: ")
+                try:
+                    z_alpha = float(entrada)               
+                except ValueError:
+                    print("❌ Error: La entrada no es un número flotante válido.")
+                    continue                        
+                if z_alpha <= 0.0:                      
+                    print("❌ El número debe ser un flotante positivo.")
+                    continue                        
+                break 
             prueba_promedios(resultados, z_alpha)
             print("--------------------------------------------------")
 
         elif opcion == '2':
             print("\nPrueba de la Frecuencia:")
             print("--------------------------------------------------")
-            nro_intervalos = int(input("Ingrese el número de intervalos (entero): "))
-            z_alpha = float(input("Ingrese el valor del estadístico: "))
+            while True:
+                entrada = input("Ingrese el número de intervalos: ")
+                try:
+                    nro_intervalos = int(entrada)               
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+                    continue                        
+                if nro_intervalos <= 0:                      
+                    print("❌ El número debe ser un entero positivo.")
+                    continue                        
+                break     
+
+            while True:
+                entrada = input("Ingrese el valor del estadístico: ")
+                try:
+                    z_alpha = float(entrada)               
+                except ValueError:
+                    print("❌ Error: La entrada no es un número flotante válido.")
+                    continue                        
+                if z_alpha <= 0.0:                      
+                    print("❌ El número debe ser un flotante positivo.")
+                    continue                        
+                break 
+
             prueba_frecuencia(resultados, nro_intervalos, z_alpha)
             print("--------------------------------------------------")
 
         elif opcion == '3':
             print("\nPrueba de la Serie")
             print("--------------------------------------------------")
-            estadistico = float(input("Ingrese el valor del estadístico: "))
-            x= int(input("Ingrese el valor de x: "))
+            while True:
+                entrada = input("Ingrese el valor del estadístico: ")
+                try:
+                    estadistico = float(entrada)               
+                except ValueError:
+                    print("❌ Error: La entrada no es un número flotante válido.")
+                    continue                        
+                if estadistico <= 0.0:                      
+                    print("❌ El número debe ser un flotante positivo.")
+                    continue                        
+                break 
+            while True:
+                entrada = input("Ingrese el valor de x: ")
+                try:
+                    x = int(entrada)               
+                except ValueError:
+                    print("❌ Error: La entrada no es un número flotante válido.")
+                    continue                        
+                if x <= 0:                      
+                    print("❌ El número debe ser un flotante positivo.")
+                    continue                        
+                break 
             prueba_serie(resultados, estadistico, x)
             print("--------------------------------------------------")
 
@@ -45,14 +97,34 @@ def mostrar_menu_pruebas(resultados):
         elif opcion == '4':
             print("\nPrueba de K-S")
             print("--------------------------------------------------")
-            d = float(input("Ingrese el valor del estadístico: "))
+            while True:
+                entrada = input("Ingrese el valor del estadístico: ")
+                try:
+                    d = float(entrada)               
+                except ValueError:
+                    print("❌ Error: La entrada no es un número flotante válido.")
+                    continue                        
+                if d <= 0.0:                      
+                    print("❌ El número debe ser un flotante positivo.")
+                    continue                        
+                break 
             prueba_ks(resultados, d)
             print("--------------------------------------------------")
 
         elif opcion == '5':
             print("\nPrueba de Corrida Abajo y Arriba de la Media")
             print("--------------------------------------------------")
-            estadistico = float(input("Ingrese el valor del estadístico: "))
+            while True:
+                entrada = input("Ingrese el valor del estadístico: ")
+                try:
+                    estadistico = float(entrada)               
+                except ValueError:
+                    print("❌ Error: La entrada no es un número flotante válido.")
+                    continue                        
+                if estadistico <= 0.0:                      
+                    print("❌ El número debe ser un flotante positivo.")
+                    continue                        
+                break 
             prueba_corrida(resultados, estadistico)
             print("--------------------------------------------------")
 
@@ -82,10 +154,44 @@ def main():
 
         elif opcion == '2':
             print("Generador Pseudoaleatorio - Método de Lehmer")
-            seed = int(input("Ingrese la semilla (n₀): "))
-            t = int(input("Ingrese el número t: "))
+            while True:
+                entrada = input("Ingrese la semilla (n₀): ")
+                try:
+                    seed = int(entrada)               
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+                    continue                        
+
+                if seed <= 0:                      
+                    print("❌ El número debe ser un entero positivo.")
+                    continue                        
+                break     
+
+            while True:
+                entrada = input("Ingrese el valor de t: ")
+                try:
+                    t = int(entrada)               
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+                    continue                        
+
+                if t <= 0:                      
+                    print("❌ El número debe ser un entero positivo.")
+                    continue                        
+                break                          
             k = len(str(t))
-            cantidad = int(input("¿Cuántos números desea generar?: "))
+            while True:
+                entrada = input("¿Cuántos números desea generar?: ")
+                try:
+                    cantidad = int(entrada)
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+                    continue    
+                if cantidad <= 0:
+                    print("❌ El número debe ser un entero positivo.")
+                    continue
+                break
+
             resultados = metodo_lehmer(seed, t, k, cantidad)
             print("\nNúmeros pseudoaleatorios generados:")
             for i, r in enumerate(resultados):
