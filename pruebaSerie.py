@@ -51,11 +51,53 @@ def main():
     valores = []
     print("\nPrueba de la serie:")
     print("--------------------------------------------------")
-    nro_valores = int(input("¿Cuántos números desea ingresar?: "))
+    while True:
+        entrada = input("¿Cuántos números desea ingresar?: ")
+        try:
+            nro_valores = int(entrada)               
+        except ValueError:
+            print("❌ Error: La entrada no es un número entero válido.")
+            continue                        
+        if nro_valores <= 0.0:                      
+            print("❌ El número debe ser un entero positivo.")
+            continue                        
+        break
+    valores = []
     for i in range(nro_valores):
-        valores.append(float(input(f"Ingrese el número {i + 1}: ")))
-    z_alpha = float(input("Ingrese el valor de z_alpha: "))
-    x= int(input("Ingrese el valor de x: "))
+        while True:
+            entrada = input(f"Ingrese el número {i + 1}: ")
+            try:
+                valor = float(entrada)               
+            except ValueError:
+                print("❌ Error: La entrada no es un número flotante válido.")
+                continue                        
+            if valor <= 0.0:                      
+                print("❌ El número debe ser un flotante positivo.")
+                continue                        
+            break
+        valores.append(valor)
+    while True:
+        entrada = input("Ingrese el valor de z_alpha: ")
+        try:
+            z_alpha = float(entrada)               
+        except ValueError:
+            print("❌ Error: La entrada no es un número flotante válido.")
+            continue                        
+        if z_alpha <= 0.0:                      
+            print("❌ El número debe ser un flotante positivo.")
+            continue                        
+        break
+    while True:
+        entrada = input("Ingrese el valor de x: ")
+        try:
+            x = int(entrada)               
+        except ValueError:
+            print("❌ Error: La entrada no es un número flotante válido.")
+            continue                        
+        if x <= 0:                      
+            print("❌ El número debe ser un flotante positivo.")
+            continue                        
+        break 
     """valores = [0.01,0.079,0.168,0.858,0.901,0.74,0.713,0.478,0.277,0.019,0.548,0.426]
     z_alpha = 0.675
     x=2"""
