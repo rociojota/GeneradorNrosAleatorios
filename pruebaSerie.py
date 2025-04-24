@@ -4,7 +4,7 @@ def prueba_serie(numeros, z_alpha, x):
     n = len(numeros)
     n_2 = int(n/2)
     if n % 2 != 0:
-        print("❌ La cantidad de números debe ser para realizar la prueba.")
+        print("❌ La cantidad de números debe ser par para realizar la prueba.")
         return
     
     subintervalos = []
