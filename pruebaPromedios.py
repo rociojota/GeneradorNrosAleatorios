@@ -1,14 +1,16 @@
 import math
+from colorama import Fore, Style, init
+init(autoreset=True)
 
 def prueba_promedios(numeros, z_alpha):
     n = len(numeros)
     media = sum(numeros) / n
     z_cero = ((media-0.5)*math.sqrt(n))/math.sqrt(1/12)
-    print(f"Media = {media:.4f}, z₀ = {z_cero:.4f}")
+    print(Style.BRIGHT + f"Media = {media:.4f}, z₀ = {z_cero:.4f}")
     if abs(z_cero) < z_alpha:
-        print("✅ La secuencia pasa la prueba de los promedios.")
+        print(Fore.GREEN + Style.BRIGHT +"✅ La secuencia pasa la prueba de los promedios.")
     else:
-        print("❌ La secuencia NO pasa la prueba de los promedios.")
+        print(Fore.RED + Style.BRIGHT +"❌ La secuencia NO pasa la prueba de los promedios.")
 
 def main():
     valores = []

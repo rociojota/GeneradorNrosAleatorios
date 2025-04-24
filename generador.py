@@ -10,6 +10,10 @@ from pruebaFrecuencia import prueba_frecuencia
 from pruebaKS import prueba_ks
 from pruebaPromedios import prueba_promedios
 from pruebaSerie import prueba_serie
+from colorama import Fore, Style, init
+
+# Inicializar colorama
+init(autoreset=True)
 
 
 def validacion_enteros(mensaje):
@@ -18,10 +22,10 @@ def validacion_enteros(mensaje):
         try:
             valor = int(entrada)
         except ValueError:
-            print("❌ Error: La entrada no es un número entero válido.")
+            print(Fore.RED + "❌ Error: La entrada no es un número entero válido.")
             continue
         if valor <= 0:
-            print("❌ El número debe ser un entero positivo.")
+            print(Fore.RED + "❌ El número debe ser un entero positivo.")
             continue
         break
     return valor
@@ -33,10 +37,10 @@ def validacion_flotantes(mensaje):
         try:
             valor = float(entrada)
         except ValueError:
-            print("❌ Error: La entrada no es un número flotante válido.")
+            print(Fore.RED +"❌ Error: La entrada no es un número flotante válido.")
             continue
         if valor <= 0.0:
-            print("❌ El número debe ser un flotante positivo.")
+            print(Fore.RED + "❌ El número debe ser un flotante positivo.")
             continue
         break
     return valor
@@ -44,14 +48,14 @@ def validacion_flotantes(mensaje):
 
 def mostrar_menu_pruebas(resultados):
     while True:
-        print("\nSeleccione una prueba estadística:")
-        print("1. Prueba de los Promedios")
-        print("2. Prueba de la Frecuencia")
-        print("3. Prueba de la Serie")
-        print("4. Prueba de K-S")
-        print("5. Prueba de Corrida Abajo y Arriba de la Media")
-        print("6. Volver al menú principal")
-        opcion = input("Opción: ")
+        print(Fore.YELLOW + "\nSeleccione una prueba estadística:")
+        print(Fore.GREEN +"1. Prueba de los Promedios")
+        print(Fore.GREEN +"2. Prueba de la Frecuencia")
+        print(Fore.GREEN +"3. Prueba de la Serie")
+        print(Fore.GREEN +"4. Prueba de K-S")
+        print(Fore.GREEN +"5. Prueba de Corrida Abajo y Arriba de la Media")
+        print(Fore.GREEN +"6. Volver al menú principal")
+        opcion = input(Fore.MAGENTA + "\n🡺 Ingrese su opción (1-6): " + Style.RESET_ALL)
 
         if opcion == "1":
             print("\nPrueba de los promedios:")
@@ -96,24 +100,27 @@ def mostrar_menu_pruebas(resultados):
             break
 
         else:
-            print("❌ Opción no válida. Por favor seleccione una opción del 1 al 6.")
+            print(Fore.RED + "❌ Opción no válida. Por favor seleccione una opción del 1 al 6.")
             print("--------------------------------------------------")
 
 
 def main():
     resultados = []
     while True:
-        print("\nSeleccione un método generador de números pseudoaleatorios:")
-        print("1. Método de la parte central del cuadrado")
-        print("2. Método de Lehmer")
-        print("3. Método Congruencial Mixto")
-        print("4. Método congruencial Multiplicativo")
-        print("5. Método congruencial Aditivo")
-        print("6. Salir")
-        opcion = input("Opción: ")
+        print(Fore.CYAN + "\nMENÚ PRINCIPAL")
+        print(Fore.YELLOW + "Seleccione un método generador de números pseudoaleatorios:")
+        print(Fore.GREEN + "  1. Método de la Parte Central del Cuadrado")
+        print(Fore.GREEN + "  2. Método de Lehmer")
+        print(Fore.GREEN + "  3. Método Congruencial Mixto")
+        print(Fore.GREEN + "  4. Método Congruencial Multiplicativo")
+        print(Fore.GREEN + "  5. Método Congruencial Aditivo")
+        print(Fore.RED + "  6. ❌ Salir")
+
+        opcion = input(Fore.MAGENTA + "\n🡺 Ingrese su opción (1-6): " + Style.RESET_ALL)
 
         if opcion == "1":
-            print("Generador Pseudoaleatorio - Método de la Parte Central del Cuadrado")
+            print("═" * 50)
+            print(Fore.BLUE + "\n Generador Pseudoaleatorio - Método de la Parte Central del Cuadrado")
 
             seed = validacion_enteros("Ingrese la semilla (M): ")
             n_digitos = validacion_enteros(
@@ -126,12 +133,12 @@ def main():
             print("\nNúmeros pseudoaleatorios generados:")
             for i, r in enumerate(resultados):
                 print(f"{i + 1}: {r:.5f}")
-
+            print("═" * 50)
             mostrar_menu_pruebas(resultados)
-            print("--------------------------------------------------")
 
         elif opcion == "2":
-            print("Generador Pseudoaleatorio - Método de Lehmer")
+            print("═" * 50) 
+            print(Fore.BLUE + "Generador Pseudoaleatorio - Método de Lehmer")
             seed = validacion_enteros("Ingrese la semilla (n₀): ")
             t = validacion_enteros("Ingrese el valor de t: ")
             k = len(str(t))
@@ -140,11 +147,12 @@ def main():
             print("\nNúmeros pseudoaleatorios generados:")
             for i, r in enumerate(resultados):
                 print(f"{i + 1}: {r:.5f}")
+            print("═" * 50) 
             mostrar_menu_pruebas(resultados)
 
         elif opcion == "3":
-            print("\nMétodo Congruencial Mixto:")
-            print("--------------------------------------------------")
+            print("═" * 50)
+            print(Fore.BLUE + "\nMétodo Congruencial Mixto:")
 
             # Validación de 'a' (multiplicador)
             while True:
@@ -210,11 +218,12 @@ def main():
             print("\nNúmeros pseudoaleatorios generados:")
             for i, r in enumerate(resultados):
                 print(f"{i + 1}: {r:.5f}")
+            print("═" * 50)
             mostrar_menu_pruebas(resultados)
 
         elif opcion == "4":
-            print("\nGenerador Pseudoaleatorio - Método Congruencial Multiplicativo")
-            print("--------------------------------------------------")
+            print("═" * 50)
+            print(Fore.BLUE + "\nGenerador Pseudoaleatorio - Método Congruencial Multiplicativo")
 
             while True:
                 entrada = input("Ingrese la semilla (n₀): ")
@@ -294,8 +303,8 @@ def main():
                 print(f"❌ Error: {e}")
 
         elif opcion == "5":
-            print("\nMétodo Congruencial Aditivo:")
-            print("--------------------------------------------------")
+            print("═" * 50)
+            print(Fore.BLUE + "\nMétodo Congruencial Aditivo:")
 
             # Validación de semillas
             while True:
@@ -345,14 +354,15 @@ def main():
             print("\nNúmeros pseudoaleatorios generados:")
             for i, r in enumerate(resultados):
                 print(f"{i + 1}: {r:.5f}")
+            print("═" * 50)
             mostrar_menu_pruebas(resultados)
 
         elif opcion == "6":
-            print("\nSaliendo del programa. ¡Hasta luego!")
+            print(Fore.GREEN + "\nSaliendo del programa. ¡Hasta luego!")
             break
 
         else:
-            print("❌ Opción no válida. Por favor selec2cione una opción del 1 al 6.")
+            print(Fore.RED + "❌ Opción no válida. Por favor seleccione una opción del 1 al 6.")
             print("--------------------------------------------------")
 
 

@@ -1,4 +1,6 @@
 import math
+from colorama import Fore, Style, init
+init(autoreset=True)
 
 def prueba_ks(numeros, d):
     n_ordenados = sorted(numeros)
@@ -14,11 +16,11 @@ def prueba_ks(numeros, d):
         diferencia.append(round(abs(distribucion_acumulada[i] - n_ordenados[i]), 3))
     d_n = max(diferencia)
 
-    print(f"Dn: {d_n}")
+    print(Style.BRIGHT + f"Dn: {d_n}")
     if abs(d_n) < d:
-        print("✅ La secuencia pasa la prueba de KS.")
+        print(Fore.GREEN + Style.BRIGHT +"✅ La secuencia pasa la prueba de KS.")
     else:
-        print("❌ La secuencia NO pasa la prueba de KS.")
+        print(Fore.RED + Style.BRIGHT +"❌ La secuencia NO pasa la prueba de KS.")
         
 
 

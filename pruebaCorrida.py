@@ -1,5 +1,7 @@
 import math
 from collections import Counter
+from colorama import Fore, Style, init
+init(autoreset=True)
 
 def prueba_corrida(numeros, estadistico):
     """
@@ -59,19 +61,19 @@ def prueba_corrida(numeros, estadistico):
     freq_obs = Counter(longitudes)
     max_len = max(longitudes)
 
-    print("\nFrecuencia observada por longitud:")
+    print(Style.BRIGHT + "\nFrecuencia observada por longitud:")
     all_lengths = list(range(1, max(max_len, 2) + 1))
     for L in all_lengths:
-        print(f"Longitud {L}: {freq_obs.get(L, 0)}")
+        print(Style.BRIGHT + f"Longitud {L}: {freq_obs.get(L, 0)}")
 
     # Calcular frecuencias esperadas
     n = len(numeros)
-    print("\nFrecuencia esperada por longitud:")
+    print(Style.BRIGHT + "\nFrecuencia esperada por longitud:")
     freq_esperadas = []
     for L in all_lengths:
         fe = (n - L + 3) / (2 ** (L + 1))
         freq_esperadas.append(fe)
-        print(f"Longitud {L}: {fe:.4f}")
+        print(Style.BRIGHT + f"Longitud {L}: {fe:.4f}")
     
     # Calcular el estadístico
     calc_estadistico = 0
@@ -80,12 +82,12 @@ def prueba_corrida(numeros, estadistico):
         expected_freq = freq_esperadas[L-1]
         calc_estadistico += ((observed_freq - expected_freq) ** 2)/expected_freq
 
-    print(f"\nEstadístico: {calc_estadistico:.4f}")
+    print(Style.BRIGHT + f"\nEstadístico: {calc_estadistico:.4f}")
     
     if calc_estadistico < estadistico:
-        print("✅ La secuencia pasa la prueba de corrida arriba y abajo de la media.")
+        print(Fore.GREEN + Style.BRIGHT + "✅ La secuencia pasa la prueba de corrida arriba y abajo de la media.")
     else:
-        print("❌ La secuencia NO pasa la prueba de corrida arriba y abajo de la media.")
+        print(Fore.RED + Style.BRIGHT + "❌ La secuencia NO pasa la prueba de corrida arriba y abajo de la media.")
 
 
 def main():

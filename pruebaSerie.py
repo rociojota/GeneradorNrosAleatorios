@@ -1,10 +1,12 @@
 import math
+from colorama import Fore, Style, init
+init(autoreset=True)
 
 def prueba_serie(numeros, z_alpha, x):
     n = len(numeros)
     n_2 = int(n/2)
     if n % 2 != 0:
-        print("❌ La cantidad de números debe ser par para realizar la prueba.")
+        print(Fore.RED + Style.BRIGHT + "\n❌ La cantidad de números debe ser par para realizar la prueba.")
         return
     
     subintervalos = []
@@ -32,7 +34,7 @@ def prueba_serie(numeros, z_alpha, x):
         print(fila)
 
     frecuencia_esperada = n_2 / (x**2)
-    print(f"Frecuencia esperada Fe: {frecuencia_esperada:.2f} ")
+    print(Style.BRIGHT + f"Frecuencia esperada Fe: {frecuencia_esperada:.2f} ")
 
     # Calcular el estadístico Chi-cuadrado
     chi_cuadrado = 0
@@ -43,9 +45,9 @@ def prueba_serie(numeros, z_alpha, x):
     print(f"\nChi-cuadrado = {chi_cuadrado:.4f}")
 
     if abs(chi_cuadrado) < z_alpha:
-        print("✅ La secuencia pasa la prueba de la serie.")
+        print(Fore.GREEN + Style.BRIGHT +"✅ La secuencia pasa la prueba de la serie.")
     else:
-        print("❌ La secuencia NO pasa la prueba de la serie.")
+        print(Fore.RED + Style.BRIGHT +"❌ La secuencia NO pasa la prueba de la serie.")
 
 def main():
     valores = []

@@ -1,0 +1,7 @@
+Nombre del método                       	Parámetros                                        	Resultados
+========================================================================================================================
+Método de la parte central del cuadrado 	semilla=123, N=3, n=5                             	0.512, 0.214, 0.579, 0.524
+Método de Lehmer                        	semilla=4122, t=76, n=5                           	0.3241, 0.6292, 0.8145, 0.8959, 0.816
+Método congruencial mixto               	multiplicador_a=5, c=7, semilla=4, m=8            	0.375, 0.75, 0.625, 0.0, 0.875, 0.25, 0.125, 0.5
+Método congruencial multiplicativo      	a=5631, semilla=1317, m=547                       	0.636, 0.427, 0.873, 0.691, 0.257, 0.5
+Método congruencial aditivo             	semillas=[1942, 2347, 5131, 3317], m=5147         	0.021, 0.482, 0.479, 0.123, 0.145

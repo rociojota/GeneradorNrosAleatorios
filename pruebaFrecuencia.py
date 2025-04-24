@@ -1,3 +1,6 @@
+from colorama import Fore, Style, init
+init(autoreset=True)
+
 def prueba_frecuencia(numeros, nro_intervalos, z_alpha):
     n = len(numeros)
     tamaño_subintervalo = 1 / nro_intervalos
@@ -9,7 +12,7 @@ def prueba_frecuencia(numeros, nro_intervalos, z_alpha):
         subintervalos.append((inicio, fin))
 
     frecuencia_esperada = n / nro_intervalos
-    print(f"Frecuencia esperada Fe: {frecuencia_esperada:.2f} por intervalo")
+    print(Style.BRIGHT + f"Frecuencia esperada Fe: {frecuencia_esperada:.2f} por intervalo")
 
     # Agrupar los números en los intervalos para obtener la frecuencia observada
     frecuencias = [0] * len(subintervalos)
@@ -28,18 +31,18 @@ def prueba_frecuencia(numeros, nro_intervalos, z_alpha):
     # Mostrar resultados
     print("\nFrecuencia observada:")
     for i, ((inicio, fin), frecuencia) in enumerate(zip(subintervalos, frecuencias)):
-        print(f"Intervalo {i + 1} ({inicio}, {fin}): {frecuencia} datos")
+        print(Style.BRIGHT + f"Intervalo {i + 1} ({inicio}, {fin}): {frecuencia} datos")
 
     #Calcular el estadístico Chi-cuadrado
     chi_cuadrado = 0
     for frecuencia in frecuencias:
         chi_cuadrado += ((frecuencia - frecuencia_esperada) ** 2)*(nro_intervalos/n)
-    print(f"\nChi-cuadrado = {chi_cuadrado:.4f}")
+    print(Style.BRIGHT + f"\nChi-cuadrado = {chi_cuadrado:.4f}")
 
     if abs(chi_cuadrado) < z_alpha:
-        print("✅ La secuencia pasa la prueba de los promedios.")
+        print(Fore.GREEN + Style.BRIGHT +"✅ La secuencia pasa la prueba de los promedios.")
     else:
-        print("❌ La secuencia NO pasa la prueba de los promedios.")
+        print(Fore.RED + Style.BRIGHT +"❌ La secuencia NO pasa la prueba de los promedios.")
 
 
 def main():
