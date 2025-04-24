@@ -1,42 +1,46 @@
-from lehmer import metodo_lehmer
-from pruebaFrecuencia import prueba_frecuencia
-from pruebaPromedios import prueba_promedios
-from pruebaCorrida import prueba_corrida
-from pruebaSerie import prueba_serie
-from pruebaKS import prueba_ks
-from parteCentralCuadrado import metodo_parte_central_cuadrado
-from congruencialMixto import metodo_congruencial_mixto
-from congruencialAditivo import metodo_congruencial_aditivo
-
 import time
+
+from congruencial_multiplicativo import metodo_congruencial_multiplicativo
+from congruencialAditivo import metodo_congruencial_aditivo
+from congruencialMixto import metodo_congruencial_mixto
+from lehmer import metodo_lehmer
+from parteCentralCuadrado import metodo_parte_central_cuadrado
+from pruebaCorrida import prueba_corrida
+from pruebaFrecuencia import prueba_frecuencia
+from pruebaKS import prueba_ks
+from pruebaPromedios import prueba_promedios
+from pruebaSerie import prueba_serie
+
 
 def validacion_enteros(mensaje):
     while True:
         entrada = input(mensaje)
         try:
-            valor = int(entrada)               
+            valor = int(entrada)
         except ValueError:
             print("❌ Error: La entrada no es un número entero válido.")
-            continue                        
-        if valor <= 0:                      
+            continue
+        if valor <= 0:
             print("❌ El número debe ser un entero positivo.")
-            continue                        
-        break  
+            continue
+        break
     return valor
+
 
 def validacion_flotantes(mensaje):
     while True:
         entrada = input(mensaje)
         try:
-            valor = float(entrada)               
+            valor = float(entrada)
         except ValueError:
             print("❌ Error: La entrada no es un número flotante válido.")
-            continue                        
-        if valor <= 0.0:                      
+            continue
+        if valor <= 0.0:
             print("❌ El número debe ser un flotante positivo.")
-            continue                        
-        break 
+            continue
+        break
     return valor
+
 
 def mostrar_menu_pruebas(resultados):
     while True:
@@ -49,14 +53,14 @@ def mostrar_menu_pruebas(resultados):
         print("6. Volver al menú principal")
         opcion = input("Opción: ")
 
-        if opcion == '1':
+        if opcion == "1":
             print("\nPrueba de los promedios:")
             print("--------------------------------------------------")
             z_alpha = validacion_flotantes("Ingrese el valor de z_alpha: ")
             prueba_promedios(resultados, z_alpha)
             print("--------------------------------------------------")
 
-        elif opcion == '2':
+        elif opcion == "2":
             print("\nPrueba de la Frecuencia:")
             print("--------------------------------------------------")
             nro_intervalos = validacion_enteros("Ingrese el número de intervalos: ")
@@ -65,7 +69,7 @@ def mostrar_menu_pruebas(resultados):
             prueba_frecuencia(resultados, nro_intervalos, z_alpha)
             print("--------------------------------------------------")
 
-        elif opcion == '3':
+        elif opcion == "3":
             print("\nPrueba de la Serie")
             print("--------------------------------------------------")
             estadistico = validacion_flotantes("Ingrese el valor del estadístico: ")
@@ -73,28 +77,28 @@ def mostrar_menu_pruebas(resultados):
             prueba_serie(resultados, estadistico, x)
             print("--------------------------------------------------")
 
-
-        elif opcion == '4':
+        elif opcion == "4":
             print("\nPrueba de K-S")
             print("--------------------------------------------------")
             d = validacion_flotantes("Ingrese el valor del estadístico: ")
             prueba_ks(resultados, d)
             print("--------------------------------------------------")
 
-        elif opcion == '5':
+        elif opcion == "5":
             print("\nPrueba de Corrida Abajo y Arriba de la Media")
             print("--------------------------------------------------")
             estadistico = validacion_flotantes("Ingrese el valor del estadístico: ")
             prueba_corrida(resultados, estadistico)
             print("--------------------------------------------------")
 
-        elif opcion == '6':
+        elif opcion == "6":
             print("Volviendo al menú principal...")
             break
 
         else:
             print("❌ Opción no válida. Por favor seleccione una opción del 1 al 6.")
             print("--------------------------------------------------")
+
 
 def main():
     resultados = []
@@ -108,27 +112,28 @@ def main():
         print("6. Salir")
         opcion = input("Opción: ")
 
-        if opcion == '1':
-            
+        if opcion == "1":
             print("Generador Pseudoaleatorio - Método de la Parte Central del Cuadrado")
-    
+
             seed = validacion_enteros("Ingrese la semilla (M): ")
-            n_digitos = validacion_enteros("Ingrese el número de dígitos deseados (N): ")
+            n_digitos = validacion_enteros(
+                "Ingrese el número de dígitos deseados (N): "
+            )
             cantidad = validacion_enteros("¿Cuántos números desea generar?: ")
-            
+
             resultados = metodo_parte_central_cuadrado(seed, n_digitos, cantidad)
-            
+
             print("\nNúmeros pseudoaleatorios generados:")
             for i, r in enumerate(resultados):
                 print(f"{i + 1}: {r:.5f}")
-            
+
             mostrar_menu_pruebas(resultados)
             print("--------------------------------------------------")
 
-        elif opcion == '2':
+        elif opcion == "2":
             print("Generador Pseudoaleatorio - Método de Lehmer")
             seed = validacion_enteros("Ingrese la semilla (n₀): ")
-            t = validacion_enteros("Ingrese el valor de t: ")                          
+            t = validacion_enteros("Ingrese el valor de t: ")
             k = len(str(t))
             cantidad = validacion_enteros("¿Cuántos números desea generar?: ")
             resultados = metodo_lehmer(seed, t, k, cantidad)
@@ -137,10 +142,10 @@ def main():
                 print(f"{i + 1}: {r:.5f}")
             mostrar_menu_pruebas(resultados)
 
-        elif opcion == '3':
+        elif opcion == "3":
             print("\nMétodo Congruencial Mixto:")
             print("--------------------------------------------------")
-            
+
             # Validación de 'a' (multiplicador)
             while True:
                 entrada = input("Multiplicador a: ")
@@ -152,7 +157,7 @@ def main():
                     break
                 except ValueError:
                     print("❌ Error: La entrada no es un número entero válido.")
-            
+
             # Validación de 'c' (incremento)
             while True:
                 entrada = input("Incremento c: ")
@@ -164,7 +169,7 @@ def main():
                     break
                 except ValueError:
                     print("❌ Error: La entrada no es un número entero válido.")
-            
+
             # Validación de 'm' (módulo)
             while True:
                 entrada = input("Módulo m: ")
@@ -176,7 +181,7 @@ def main():
                     break
                 except ValueError:
                     print("❌ Error: La entrada no es un número entero válido.")
-            
+
             # Validación de 'x0' (semilla)
             while True:
                 entrada = input("Semilla inicial x0: ")
@@ -188,7 +193,7 @@ def main():
                     break
                 except ValueError:
                     print("❌ Error: La entrada no es un número entero válido.")
-            
+
             # Validación de 'n' (cantidad de números a generar)
             while True:
                 entrada = input("¿Cuántos números querés generar? n: ")
@@ -207,21 +212,96 @@ def main():
                 print(f"{i + 1}: {r:.5f}")
             mostrar_menu_pruebas(resultados)
 
-
-
-        elif opcion == '4':
-            print("\nMétodo Congruencial Multiplicativo:")
+        elif opcion == "4":
+            print("\nGenerador Pseudoaleatorio - Método Congruencial Multiplicativo")
             print("--------------------------------------------------")
-            resultados = metodo_congruencial_multiplicativo()
-            print(f"Resultados: {resultados}")
 
-        elif opcion == '5':
+            while True:
+                entrada = input("Ingrese la semilla (n₀): ")
+                try:
+                    semilla = int(entrada)
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+                    continue
+                if semilla <= 0 or semilla % 2 == 0 or semilla % 5 == 0:
+                    print(
+                        "❌ La semilla debe ser un número impar, mayor que 0 y no divisible por 5."
+                    )
+                    continue
+                break
+
+            while True:
+                entrada = input("Ingrese la constante multiplicativa (a): ")
+                try:
+                    a = int(entrada)
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+                    continue
+                if a <= 0:
+                    print("❌ La constante multiplicativa debe ser mayor que 0.")
+                    continue
+                break
+
+            while True:
+                entrada = input("Ingrese el módulo (m): ")
+                try:
+                    m = int(entrada)
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+                    continue
+                if m <= 0:
+                    print("❌ El módulo debe ser mayor que 0.")
+                    continue
+                break
+
+            while True:
+                entrada = input("¿Cuántos números desea generar?: ")
+                try:
+                    cantidad = int(entrada)
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+                    continue
+                if cantidad <= 0:
+                    print("❌ La cantidad debe ser mayor que 0.")
+                    continue
+                break
+
+            while True:
+                entrada = input(
+                    "Ingrese la cantidad de dígitos de precisión (por ejemplo, 4): "
+                )
+                try:
+                    digitos_precision = int(entrada)
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+                    continue
+                if digitos_precision <= 0 or digitos_precision >= 10:
+                    print(
+                        "❌ La cantidad de dígitos debe ser mayor que 0 y menor que 10."
+                    )
+                    continue
+                break
+
+            try:
+                resultados = metodo_congruencial_multiplicativo(
+                    semilla, a, m, cantidad, digitos_precision
+                )
+                print("\nNúmeros pseudoaleatorios generados:")
+                for i, r in enumerate(resultados):
+                    print(f"{i + 1}: {r:.{digitos_precision}f}")
+                mostrar_menu_pruebas(resultados)
+            except Exception as e:
+                print(f"❌ Error: {e}")
+
+        elif opcion == "5":
             print("\nMétodo Congruencial Aditivo:")
             print("--------------------------------------------------")
 
             # Validación de semillas
             while True:
-                semillas_input = input("Ingresá las semillas (números separados por comas): ")
+                semillas_input = input(
+                    "Ingresá las semillas (números separados por comas): "
+                )
                 try:
                     semillas = [int(x.strip()) for x in semillas_input.split(",")]
                     if len(semillas) < 2:
@@ -232,7 +312,9 @@ def main():
                         continue
                     break
                 except ValueError:
-                    print("❌ Error: Asegurate de ingresar solo números enteros separados por comas.")
+                    print(
+                        "❌ Error: Asegurate de ingresar solo números enteros separados por comas."
+                    )
 
             # Validación de módulo m
             while True:
@@ -265,15 +347,13 @@ def main():
                 print(f"{i + 1}: {r:.5f}")
             mostrar_menu_pruebas(resultados)
 
-
-        elif opcion == '6':
+        elif opcion == "6":
             print("\nSaliendo del programa. ¡Hasta luego!")
             break
 
         else:
             print("❌ Opción no válida. Por favor selec2cione una opción del 1 al 6.")
             print("--------------------------------------------------")
-
 
 
 if __name__ == "__main__":
