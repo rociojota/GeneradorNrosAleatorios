@@ -5,6 +5,8 @@ from pruebaCorrida import prueba_corrida
 from pruebaSerie import prueba_serie
 from pruebaKS import prueba_ks
 from parteCentralCuadrado import metodo_parte_central_cuadrado
+from congruencialMixto import metodo_congruencial_mixto
+from congruencialAditivo import metodo_congruencial_aditivo
 
 import time
 
@@ -138,9 +140,74 @@ def main():
         elif opcion == '3':
             print("\nMétodo Congruencial Mixto:")
             print("--------------------------------------------------")
-            resultados = metodo_congruencial_mixto()
+            
+            # Validación de 'a' (multiplicador)
+            while True:
+                entrada = input("Multiplicador a: ")
+                try:
+                    a = int(entrada)
+                    if a <= 0:
+                        print("❌ El número debe ser un entero positivo.")
+                        continue
+                    break
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+            
+            # Validación de 'c' (incremento)
+            while True:
+                entrada = input("Incremento c: ")
+                try:
+                    c = int(entrada)
+                    if c <= 0:
+                        print("❌ El número debe ser un entero positivo.")
+                        continue
+                    break
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+            
+            # Validación de 'm' (módulo)
+            while True:
+                entrada = input("Módulo m: ")
+                try:
+                    m = int(entrada)
+                    if m <= 0:
+                        print("❌ El módulo m debe ser un entero positivo.")
+                        continue
+                    break
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+            
+            # Validación de 'x0' (semilla)
+            while True:
+                entrada = input("Semilla inicial x0: ")
+                try:
+                    x0 = int(entrada)
+                    if not (0 <= x0 < m):
+                        print(f"❌ La semilla x0 debe estar entre 0 y {m - 1}.")
+                        continue
+                    break
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+            
+            # Validación de 'n' (cantidad de números a generar)
+            while True:
+                entrada = input("¿Cuántos números querés generar? n: ")
+                try:
+                    n = int(entrada)
+                    if n <= 0:
+                        print("❌ El número debe ser un entero positivo.")
+                        continue
+                    break
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
 
-            print(f"Resultados: {resultados}")
+            resultados = metodo_congruencial_mixto(a, c, m, x0, n)
+            print("\nNúmeros pseudoaleatorios generados:")
+            for i, r in enumerate(resultados):
+                print(f"{i + 1}: {r:.5f}")
+            mostrar_menu_pruebas(resultados)
+
+
 
         elif opcion == '4':
             print("\nMétodo Congruencial Multiplicativo:")
@@ -151,8 +218,53 @@ def main():
         elif opcion == '5':
             print("\nMétodo Congruencial Aditivo:")
             print("--------------------------------------------------")
-            resultados = metodo_congruencial_aditivo()
-            print(f"Resultados: {resultados}")
+
+            # Validación de semillas
+            while True:
+                semillas_input = input("Ingresá las semillas (números separados por comas): ")
+                try:
+                    semillas = [int(x.strip()) for x in semillas_input.split(",")]
+                    if len(semillas) < 2:
+                        print("❌ Error: Debés ingresar al menos dos semillas.")
+                        continue
+                    if any(s <= 0 for s in semillas):
+                        print("❌ Todas las semillas deben ser enteros positivos.")
+                        continue
+                    break
+                except ValueError:
+                    print("❌ Error: Asegurate de ingresar solo números enteros separados por comas.")
+
+            # Validación de módulo m
+            while True:
+                entrada = input("Módulo m: ")
+                try:
+                    m = int(entrada)
+                    if m <= 0:
+                        print("❌ El módulo m debe ser un entero positivo.")
+                        continue
+                    break
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+
+            # Validación de cantidad n
+            while True:
+                entrada = input("¿Cuántos números querés generar? n: ")
+                try:
+                    n = int(entrada)
+                    if n <= 0:
+                        print("❌ El número debe ser un entero positivo.")
+                        continue
+                    break
+                except ValueError:
+                    print("❌ Error: La entrada no es un número entero válido.")
+
+            resultados = metodo_congruencial_aditivo(semillas, m, n)
+
+            print("\nNúmeros pseudoaleatorios generados:")
+            for i, r in enumerate(resultados):
+                print(f"{i + 1}: {r:.5f}")
+            mostrar_menu_pruebas(resultados)
+
 
         elif opcion == '6':
             print("\nSaliendo del programa. ¡Hasta luego!")
