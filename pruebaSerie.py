@@ -51,7 +51,7 @@ def main():
     valores = []
     print("\nPrueba de la serie:")
     print("--------------------------------------------------")
-    while True:
+    """while True:
         entrada = input("¿Cuántos números desea ingresar?: ")
         try:
             nro_valores = int(entrada)               
@@ -97,10 +97,15 @@ def main():
         if x <= 0:                      
             print("❌ El número debe ser un flotante positivo.")
             continue                        
-        break 
-    """valores = [0.01,0.079,0.168,0.858,0.901,0.74,0.713,0.478,0.277,0.019,0.548,0.426]
-    z_alpha = 0.675
-    x=2"""
+        break """
+    valores = [
+    0.792, 0.396, 0.01, 0.158, 0.178, 0.248, 0.99, 0.089, 0.436, 0.149, 0.644, 0.376,
+    0.941, 0.416, 0.079, 0.901, 0.277, 0.594, 0.703, 0.248, 0.426, 0.218, 0.96, 0.594,
+    0.188, 0.584, 0.168, 0.713, 0.119, 0.04, 0.762, 0.792, 0.396, 0.01, 0.158, 0.178,
+    0.248, 0.99, 0.089, 0.436, 0.149, 0.644, 0.376, 0.941, 0.366, 0.287, 0.713, 0.05
+    ]
+    x= 3
+    z_alpha= 15.51
     prueba_serie(valores, z_alpha, x)
 
 if __name__ == "__main__":
